@@ -6,21 +6,31 @@ const postController = require('./postController');
 const commentController = require('./commentController');
 
 // Homepage route
-router.get('/',  async (req, res) => {
-    try {
-        // Fetch blog posts from the database
-        const posts = await Post.findAll();
+router.get('/', async (req, res) => {
+  try {
+    // Fetch blog posts from the database
+    const posts = await Post.findAll();
 
-        // Render the homepage view and pass the posts data
-        res.render('home', { posts });
-    } catch (err) {
-        console.log(err);
-        res.status(500).json({ message: 'Internal server error' });
-    }
+    // Render the homepage view and pass the posts data
+    res.render('home', { posts });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: 'Internal server error' });
+  }
 });
 
 // Authentication routes
 router.use('/users', userController);
+
+// Signup route
+router.get('/signup', (req, res) => {
+  res.render('signup');
+});
+
+// Login route
+router.get('/login', (req, res) => {
+  res.render('login');
+});
 
 // Post routes
 router.use('/posts', postController);
