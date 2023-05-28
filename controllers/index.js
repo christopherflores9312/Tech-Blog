@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const { Post } = require('../models');
 const userController = require('./userController');
 const postController = require('./postController');
 const commentController = require('./commentController');
