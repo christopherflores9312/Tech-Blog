@@ -1,9 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const { User } = require('../models'); 
+const { User } = require('../models');
 
-// Register a new user
-router.post('/signup', async (req, res) => {
+// HTML route for signup
+router.get('/signup', (req, res) => {
+  res.render('signup');
+});
+
+// HTML route for login
+router.get('/login', (req, res) => {
+  res.render('login');
+});
+
+// API route for signup
+router.post('/api/signup', async (req, res) => {
   try {
     const userData = await User.create(req.body);
 
@@ -18,8 +28,8 @@ router.post('/signup', async (req, res) => {
   }
 });
 
-// Login a user
-router.post('/login', async (req, res) => {
+// API route for login
+router.post('/api/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { username: req.body.username } });
 
@@ -38,17 +48,16 @@ router.post('/login', async (req, res) => {
     req.session.save(() => {
       req.session.user_id = userData.id;
       req.session.logged_in = true;
-      
+
       res.json({ user: userData, message: 'You are now logged in!' });
     });
-
   } catch (err) {
     res.status(400).json(err);
   }
 });
 
-// Logout a user
-router.post('/logout', (req, res) => {
+// API route for logout
+router.post('/api/logout', (req, res) => {
   if (req.session.logged_in) {
     req.session.destroy(() => {
       res.status(204).end();
