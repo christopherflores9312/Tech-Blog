@@ -26,6 +26,21 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use((req, res, next) => {
+  res.locals.logged_in = req.session.logged_in;
+  next();
+});
+
+// Create an instance of express-handlebars with custom helper functions
+const hbs = exphbs.create({
+  helpers: {
+    formatDate: (date) => {
+      return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+    },
+  },
+});
+
+
 app.engine('handlebars', exphbs({
   defaultLayout: 'main',
   partialsDir: path.join(__dirname, '/views/partials'),

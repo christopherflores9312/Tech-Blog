@@ -44,12 +44,20 @@ router.get('/:id', async (req, res) => {
       ],
     });
 
+    if (!postData) {
+      res.status(404).json({ message: 'No post found with this id' });
+      return;
+    }
+
     const post = postData.get({ plain: true });
     res.render('post', { post });
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
+
+
 
 // Create a new post
 router.post('/', async (req, res) => {
@@ -61,7 +69,7 @@ router.post('/', async (req, res) => {
 
     // Redirect to the new post's page
     res.redirect(`/posts/${newPost.id}`);
-    
+
     // Or redirect to the homepage
     // res.redirect('/');
   } catch (err) {
@@ -83,6 +91,22 @@ router.put('/:id', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+// Post a new comment
+router.post('/:id/comments', async (req, res) => {
+  try {
+    const newComment = await Comment.create({
+      ...req.body,
+      user_id: req.session.user_id,
+      post_id: req.params.id,
+    });
+
+    res.redirect(`/posts/${req.params.id}`);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
 
 // Delete a post
 router.delete('/:id', async (req, res) => {
