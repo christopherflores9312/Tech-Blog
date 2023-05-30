@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { Post, User } = require('../models');
+const { Post, User } = require('../models');
 
 // Get all posts
 router.get('/', async (req, res) => {
@@ -68,7 +69,6 @@ router.post('/', async (req, res) => {
     res.status(400).json(err);
   }
 });
-
 
 // Update a post
 router.put('/:id', async (req, res) => {
