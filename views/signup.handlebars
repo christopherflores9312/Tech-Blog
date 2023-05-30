@@ -15,6 +15,9 @@
         <input type="password" id="password" name="password" required><br>
         <input type="submit" value="Sign Up">
     </form>
+    {{#if errorMessage}}
+        <p style="color: red;">{{errorMessage}}</p>
+    {{/if}}
     <p>Already have an account? <a href="/login">Log in</a>.</p>
 </body>
 

@@ -5,8 +5,16 @@ const userController = require('./userController');
 const postController = require('./postController');
 const commentController = require('./commentController');
 
+function ensureAuthenticated(req, res, next) {
+  if (req.session && req.session.logged_in) {
+    next();
+  } else {
+    res.redirect('/login');
+  }
+}
+
 // Homepage route
-router.get('/', async (req, res) => {
+router.get('/', ensureAuthenticated, async (req, res) => {
   try {
     // Fetch blog posts from the database
     const posts = await Post.findAll();
