@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Post, User } = require('../models'); 
+const { Post, User } = require('../models');
 
 // Get all posts
 router.get('/', async (req, res) => {
@@ -53,6 +53,18 @@ router.post('/', async (req, res) => {
     res.status(400).json(err);
   }
 });
+
+// Display the form for creating a new post
+router.get('/new', (req, res) => {
+  // Check if the user is logged in
+  if (!req.session.logged_in) {
+    res.redirect('/users/login');
+    return;
+  }
+  // Render the new post form
+  res.render('new-post');
+});
+
 
 // Update a post
 router.put('/:id', async (req, res) => {
