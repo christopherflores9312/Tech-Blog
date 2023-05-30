@@ -5,14 +5,19 @@
 <p>{{post.content}}</p>
 <p>Posted by {{post.User.username}} on {{formatDate post.createdAt}}</p>
 
-{{log post.Comments}}
-
-{{#each post.Comments}}
-  <div class="comment">
-    <p>{{this.comment_text}}</p>
-    <p>Comment by {{this.User.username}} on {{formatDate this.createdAt}}</p>
-  </div>
-{{/each}}
+{{#if post.comments.length}}
+  <h2>Comments</h2>
+  <ul>
+    {{#each post.comments}}
+      <li>
+        <p>{{this.comment_text}}</p>
+        <p>Comment by {{this.user.username}} on {{formatDate this.createdAt}}</p>
+      </li>
+    {{/each}}
+  </ul>
+{{else}}
+  <p>No comments yet.</p>
+{{/if}}
 
 <form action="/posts/{{post.id}}/comments" method="POST">
   <textarea name="comment_text" placeholder="Leave a comment..." required></textarea>
@@ -20,5 +25,4 @@
 </form>
 
 {{> footer}}
-
 </html>

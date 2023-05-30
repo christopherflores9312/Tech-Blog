@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
   try {
     // Fetch blog posts from the database
     const posts = await Post.findAll();
-    console.log(posts);
+    // console.log(posts);
 
     // Render the homepage view and pass the posts data
     res.render('home', { posts });
@@ -46,7 +46,7 @@ router.get('/dashboard', ensureAuthenticated, async (req, res) => {
     // Render the dashboard view and pass the posts data
     res.render('dashboard', { posts });
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res.status(500).json({ message: 'Internal server error' });
   }
 });

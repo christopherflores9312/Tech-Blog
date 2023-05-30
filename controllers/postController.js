@@ -54,7 +54,7 @@ router.get('/:id', async (req, res) => {
 
     const post = postData.get({ plain: true });
     // console.log(post); // Add this line
-    console.log(post.Comments);
+    console.log(post.comments);
 
     res.render('post', { post });
   } catch (err) {
@@ -109,11 +109,31 @@ router.post('/:id/comments', async (req, res) => {
       post_id: req.params.id,
     });
 
-    res.redirect(`/posts/${req.params.id}`);
+    // Retrieve the updated post data with the newly created comment
+    const postData = await Post.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['username'],
+        },
+        {
+          model: Comment,
+          include: {
+            model: User,
+            attributes: ['username'],
+          },
+        },
+      ],
+    });
+
+    const post = postData.get({ plain: true });
+
+    res.render('post', { post });
   } catch (err) {
     res.status(400).json(err);
   }
 });
+
 
 
 // Delete a post
