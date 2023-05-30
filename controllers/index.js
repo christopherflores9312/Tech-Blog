@@ -3,7 +3,7 @@ const router = express.Router();
 const { Post } = require('../models');
 const userController = require('./userController');
 const postController = require('./postController');
-const commentController = require('./commentController');
+// const commentController = require('./commentController');
 
 function ensureAuthenticated(req, res, next) {
   if (req.session && req.session.logged_in) {
@@ -66,6 +66,6 @@ router.get('/login', (req, res) => {
 router.use('/posts', postController);
 
 // Comment routes
-router.use('/comments', commentController);
+// router.use('/comments', commentController);
 
 module.exports = router;

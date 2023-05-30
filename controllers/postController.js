@@ -53,6 +53,9 @@ router.get('/:id', async (req, res) => {
     
 
     const post = postData.get({ plain: true });
+    // console.log(post); // Add this line
+    console.log(post.Comments);
+
     res.render('post', { post });
   } catch (err) {
     res.status(500).json(err);
