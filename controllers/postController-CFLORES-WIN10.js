@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Post, User } = require('../models');
+const { Post, User, Comment } = require('../models');
 
 // Get all posts
 router.get('/', async (req, res) => {
@@ -41,8 +41,16 @@ router.get('/:id', async (req, res) => {
           model: User,
           attributes: ['username'],
         },
+        {
+          model: Comment,
+          include: {
+            model: User,
+            attributes: ['username'],
+          },
+        },
       ],
     });
+    
 
     const post = postData.get({ plain: true });
     res.render('post', { post });
@@ -84,6 +92,27 @@ router.put('/:id', async (req, res) => {
   }
 });
 
+// Post a new comment
+router.post('/:id/comments', async (req, res) => {
+  try {
+    if (!req.session.logged_in) {
+      res.redirect('/users/login');
+      return;
+    }
+
+    const newComment = await Comment.create({
+      ...req.body,
+      user_id: req.session.user_id,
+      post_id: req.params.id,
+    });
+
+    res.redirect(`/posts/${req.params.id}`);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+
 // Delete a post
 router.delete('/:id', async (req, res) => {
   try {
@@ -93,10 +122,11 @@ router.delete('/:id', async (req, res) => {
       },
     });
 
-    res.status(200).json(deletedPost);
+    res.redirect('/dashboard');
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
 
 module.exports = router;

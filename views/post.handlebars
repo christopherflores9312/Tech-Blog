@@ -1,15 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 {{> header}}
-<head>
-    <meta charset="UTF-8">
-    <title>{{post.title}}</title>
-</head>
+<h1>{{post.title}}</h1>
+<p>{{post.content}}</p>
+<p>Posted by {{post.User.username}} on {{formatDate post.createdAt}}</p>
 
-<body>
-    <h1>{{post.title}}</h1>
-    <p>{{post.content}}</p>
-</body>
+{{#each post.Comments}}
+  <div class="comment">
+    <p>{{this.comment_text}}</p>
+    <p>Comment by {{this.User.username}} on {{formatDate this.createdAt}}</p>
+  </div>
+{{/each}}
+
+<form action="/posts/{{post.id}}/comments" method="POST">
+  <textarea name="comment_text" placeholder="Leave a comment..." required></textarea>
+  <button type="submit">Submit</button>
+</form>
+
 {{> footer}}
 
 </html>

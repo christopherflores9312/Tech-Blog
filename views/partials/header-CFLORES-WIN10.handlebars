@@ -1,0 +1,13 @@
+<header>
+    <nav>
+        <a href="/">Home</a>
+        {{#if logged_in}}
+        <a href="/dashboard">Dashboard</a>
+        <a href="/users/logout">Logout</a>
+        {{else}}
+        <a href="/users/login">Login</a>
+        <a href="/users/signup">Sign Up</a>
+        {{/if}}
+    </nav>
+
+</header>

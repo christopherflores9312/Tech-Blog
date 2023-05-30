@@ -1,24 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-
+{{> header}}
 <head>
     <meta charset="UTF-8">
-    <title>Sign Up</title>
+    <title>Login</title>
 </head>
-
 <body>
-    <h1>Sign Up</h1>
-    <form action="/users/api/signup" method="POST">
+    <h1>Login</h1>
+    <form action="/users/api/login" method="POST">
         <label for="username">Username:</label><br>
         <input type="text" id="username" name="username" required><br>
         <label for="password">Password:</label><br>
         <input type="password" id="password" name="password" required><br>
-        <input type="submit" value="Sign Up">
+        <input type="submit" value="Login">
     </form>
     {{#if errorMessage}}
         <p style="color: red;">{{errorMessage}}</p>
     {{/if}}
-    <p>Already have an account? <a href="/login">Log in</a>.</p>
+    <p>Don't have an account? <a href="/signup">Sign up</a>.</p>
 </body>
-
+{{> footer}}
 </html>
