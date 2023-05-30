@@ -24,7 +24,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.engine('handlebars', exphbs({ defaultLayout: 'main' })); // assuming you have a main.handlebars file in your layouts directory
+app.engine('handlebars', exphbs({
+  defaultLayout: 'main',
+  runtimeOptions: {
+    allowProtoPropertiesByDefault: true,
+    allowProtoMethodsByDefault: true,
+  },
+}));
 app.set('view engine', 'handlebars');
 
 app.use(routes);

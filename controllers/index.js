@@ -18,6 +18,7 @@ router.get('/', ensureAuthenticated, async (req, res) => {
   try {
     // Fetch blog posts from the database
     const posts = await Post.findAll();
+    console.log(posts);
 
     // Render the homepage view and pass the posts data
     res.render('home', { posts });
