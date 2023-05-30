@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  {{> header}}
+  <h1>Edit Post</h1>
+  <form action="/posts/{{post.id}}" method="POST">
+    <input type="hidden" name="_method" value="PUT">
+    <label for="title">Title</label>
+    <input type="text" name="title" id="title" value="{{post.title}}" required>
+    <label for="content">Content</label>
+    <textarea name="content" id="content" rows="4" required>{{post.content}}</textarea>
+    <button type="submit">Update Post</button>
+  </form>
+  {{> footer}}
+</html>

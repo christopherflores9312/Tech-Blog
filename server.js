@@ -1,3 +1,4 @@
+const methodOverride = require('method-override');
 const express = require('express');
 const path = require('path');
 const session = require('express-session');
@@ -5,7 +6,6 @@ const exphbs = require('express-handlebars');
 const routes = require('./controllers'); // assuming you have an index.js file in your controllers directory that exports your routes
 const sequelize = require('./config/connection'); // assuming you have a connection.js file in a config directory
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const methodOverride = require('method-override');
 
 const app = express();
 const PORT = process.env.PORT || 3001;

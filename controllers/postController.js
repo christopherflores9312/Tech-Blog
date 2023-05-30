@@ -21,6 +21,32 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Get the form for editing a post
+router.get('/:id/edit', async (req, res) => {
+  try {
+    const postData = await Post.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['username'],
+        },
+      ],
+    });
+
+    if (!postData) {
+      res.status(404).json({ message: 'Post not found' });
+      return;
+    }
+
+    const post = postData.get({ plain: true });
+    res.render('edit-post', { post });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
+
 // Display the form for creating a new post
 router.get('/new', (req, res) => {
   // Check if the user is logged in
@@ -80,20 +106,8 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Update a post
-router.put('/:id', async (req, res) => {
-  try {
-    const updatedPost = await Post.update(req.body, {
-      where: {
-        id: req.params.id,
-      },
-    });
 
-    res.status(200).json(updatedPost);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+
 
 // Post a new comment
 router.post('/:id/comments', async (req, res) => {
@@ -131,6 +145,32 @@ router.post('/:id/comments', async (req, res) => {
     res.render('post', { post });
   } catch (err) {
     res.status(400).json(err);
+  }
+});
+
+// Update a post
+router.put('/:id', async (req, res) => {
+  try {
+    const updatedPost = await Post.update(
+      {
+        title: req.body.title,
+        content: req.body.content,
+      },
+      {
+        where: {
+          id: req.params.id,
+        },
+      }
+    );
+
+    if (updatedPost[0] === 0) {
+      res.status(404).json({ message: 'Post not found' });
+      return;
+    }
+
+    res.status(200).json({ message: 'Post updated successfully' });
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 
