@@ -33,23 +33,23 @@ app.use((req, res, next) => {
 
 // Create an instance of express-handlebars with custom helper functions
 const hbs = exphbs.create({
+  defaultLayout: 'main',
+  partialsDir: path.join(__dirname, '/views/partials'),
   helpers: {
     formatDate: (date) => {
       return `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
     },
   },
-});
-
-
-app.engine('handlebars', exphbs({
-  defaultLayout: 'main',
-  partialsDir: path.join(__dirname, '/views/partials'),
   runtimeOptions: {
     allowProtoPropertiesByDefault: true,
     allowProtoMethodsByDefault: true,
   },
-}));
+});
+
+// Use the instance with the helpers and runtime options to set up the view engine
+app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
+
 
 app.use(routes);
 
