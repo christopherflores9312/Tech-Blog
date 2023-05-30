@@ -5,6 +5,7 @@ const exphbs = require('express-handlebars');
 const routes = require('./controllers'); // assuming you have an index.js file in your controllers directory that exports your routes
 const sequelize = require('./config/connection'); // assuming you have a connection.js file in a config directory
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const methodOverride = require('method-override');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -19,6 +20,7 @@ const sess = {
   }),
 };
 
+app.use(methodOverride('_method'));
 app.use(session(sess));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -26,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.engine('handlebars', exphbs({
   defaultLayout: 'main',
+  partialsDir: path.join(__dirname, '/views/partials'),
   runtimeOptions: {
     allowProtoPropertiesByDefault: true,
     allowProtoMethodsByDefault: true,

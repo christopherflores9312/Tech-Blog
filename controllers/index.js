@@ -14,7 +14,7 @@ function ensureAuthenticated(req, res, next) {
 }
 
 // Homepage route
-router.get('/', ensureAuthenticated, async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     // Fetch blog posts from the database
     const posts = await Post.findAll();
@@ -30,6 +30,27 @@ router.get('/', ensureAuthenticated, async (req, res) => {
 
 // Authentication routes
 router.use('/users', userController);
+
+// Dashboard route
+router.get('/dashboard', ensureAuthenticated, async (req, res) => {
+  try {
+    // Fetch the posts that belong to the current user
+    const userPosts = await Post.findAll({
+      where: {
+        user_id: req.session.user_id,
+      },
+    });
+
+    const posts = userPosts.map((post) => post.get({ plain: true }));
+
+    // Render the dashboard view and pass the posts data
+    res.render('dashboard', { posts });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
 
 // Signup route
 router.get('/signup', (req, res) => {

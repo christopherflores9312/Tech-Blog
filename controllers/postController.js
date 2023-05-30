@@ -93,10 +93,11 @@ router.delete('/:id', async (req, res) => {
       },
     });
 
-    res.status(200).json(deletedPost);
+    res.redirect('/dashboard');
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
 
 module.exports = router;
