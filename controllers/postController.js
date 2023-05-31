@@ -151,7 +151,7 @@ router.post('/:id/comments', async (req, res) => {
 // Update a post
 router.put('/:id', async (req, res) => {
   try {
-    const updatedPost = await Post.update(
+    const [rowsUpdated] = await Post.update(
       {
         title: req.body.title,
         content: req.body.content,
@@ -163,16 +163,18 @@ router.put('/:id', async (req, res) => {
       }
     );
 
-    if (updatedPost[0] === 0) {
+    if (rowsUpdated === 0) {
       res.status(404).json({ message: 'Post not found' });
       return;
     }
 
-    res.status(200).json({ message: 'Post updated successfully' });
+    // Redirect to the updated post's page
+    res.redirect(`/posts/${req.params.id}`);
   } catch (err) {
     res.status(500).json(err);
   }
 });
+
 
 
 
