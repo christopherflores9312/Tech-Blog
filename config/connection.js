@@ -3,8 +3,8 @@ const Sequelize = require('sequelize');
 
 let sequelize;
 
-if (process.env.DATABASE_URL) {
-  sequelize = new Sequelize(process.env.DATABASE_URL, {
+if (process.env.CLEARDB_DATABASE_URL) {
+  sequelize = new Sequelize(process.env.CLEARDB_DATABASE_URL, {
     dialect: 'postgres',
     protocol: 'postgres',
     dialectOptions: {
