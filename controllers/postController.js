@@ -97,7 +97,7 @@ router.post('/', async (req, res) => {
     });
 
     // Redirect to the new post's page
-    res.redirect(`/posts/${newPost.id}`);
+    res.redirect(`/dashboard`);
     
     // Or redirect to the homepage
     // res.redirect('/');

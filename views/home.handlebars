@@ -1,15 +1,16 @@
 {{> header}}
 {{#if posts.length}}
-  {{!-- Render the posts --}}
-  {{#each posts}}
-    <div class="post">
-      <h2><a href="/posts/{{id}}">{{title}}</a></h2>
-      <p>{{content}}</p>
-    </div>
-  {{/each}}
+{{!-- Render the posts --}}
+{{#each posts}}
+<div class="post">
+  <h2><a href="/posts/{{id}}">{{title}}</a></h2>
+  <p>Created on {{createdAt}}</p>
+
+</div>
+{{/each}}
 {{else}}
-  {{!-- No posts found --}}
-  <p>No posts available</p>
+{{!-- No posts found --}}
+<p>No posts available</p>
 {{/if}}
 <a href="/users/logout">Logout</a>
 

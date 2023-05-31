@@ -4,18 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
+    <style>
+        /* Hide the new post form by default */
+        .new-post-form {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
     <h1>Welcome to your Dashboard!</h1>
 
     <h2>Create a New Post</h2>
-    <form action="/posts" method="POST">
+    <button id="create-post-btn">Create Post</button>
+
+    <form id="new-post-form" class="new-post-form" action="/posts" method="POST">
         <label for="title">Title:</label><br>
         <input type="text" id="title" name="title" required><br>
         <label for="content">Content:</label><br>
         <textarea id="content" name="content" required></textarea><br>
-        <input type="submit" value="Create Post">
+        <input type="submit" value="Submit Post">
     </form>
 
     <h2>Your Posts</h2>
@@ -30,6 +38,18 @@
         </form>
     </div>
     {{/each}}
+
+    <script>
+        // Get references to the button and form
+        const createPostBtn = document.getElementById('create-post-btn');
+        const newPostForm = document.getElementById('new-post-form');
+
+        // Add event listener to the button
+        createPostBtn.addEventListener('click', () => {
+            // Toggle the visibility of the form
+            newPostForm.style.display = newPostForm.style.display === 'none' ? 'block' : 'none';
+        });
+    </script>
 </body>
 {{> footer}}
 </html>
