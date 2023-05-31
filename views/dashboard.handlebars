@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-{{> header}}
+
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
@@ -44,6 +44,9 @@
         const createPostBtn = document.getElementById('create-post-btn');
         const newPostForm = document.getElementById('new-post-form');
 
+        // Explicitly set the form's initial display property to 'none'
+        newPostForm.style.display = 'none';
+
         // Add event listener to the button
         createPostBtn.addEventListener('click', () => {
             // Toggle the visibility of the form
@@ -51,5 +54,3 @@
         });
     </script>
 </body>
-{{> footer}}
-</html>

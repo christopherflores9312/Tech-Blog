@@ -1,82 +1,300 @@
-/* Example CSS code for your blog site */
+/* CSS Variables for easy color management */
+:root {
+  --primary-color: #2a9d8f;
+  --secondary-color: #264653;
+  --background-color: #f4f4f4;
+  --white-color: #ffffff;
+  --black-color: #000000;
+  --light-grey-color: #d3d3d3;
+}
 
-/* Responsive typography */
 body {
-    font-size: 16px;
+  margin: 0;
+  font-size: 16px;
+  background-color: var(--background-color);
+  color: var(--black-color);
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.6;
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  /* remove the height declaration if you don't want your content to fill the viewport height */
+}
+
+
+h1,
+h2,
+h3 {
+  color: var(--primary-color);
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+h2 {
+  text-align: center;
+  font-size: 2rem;
+  color: var(--secondary-color);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+p {
+  font-size: 1.1rem;
+}
+
+.container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+header {
+  background-color: var(--secondary-color);
+  color: var(--white-color);
+  padding: 1.5rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem 0;
+}
+
+nav a {
+  color: var(--white-color);
+  text-decoration: none;
+  font-size: 1.2rem;
+  transition: color 0.3s ease-in-out;
+}
+
+nav a:hover {
+  color: var(--primary-color);
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul li {
+  margin-right: 2rem;
+}
+
+footer {
+  background-color: var(--light-grey-color);
+  color: var(--black-color);
+  padding: 2rem;
+  text-align: center;
+}
+
+footer p {
+  margin: 0;
+  padding: 1rem 0;
+  font-size: 1rem;
+}
+
+#new-post-form {
+  margin-bottom: 2rem;
+}
+
+#create-post-btn {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  padding: 0.5rem;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#create-post-btn:hover {
+  background-color: var(--secondary-color);
+}
+
+.new-post-form label,
+.new-post-form input[type="text"],
+.new-post-form textarea {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.new-post-form input[type="text"],
+.new-post-form textarea {
+  padding: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--light-grey-color);
+}
+
+.new-post-form input[type="submit"] {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  padding: 0.5rem;
+  border: none;
+  cursor: pointer;
+}
+
+.new-post-form input[type="submit"]:hover {
+  background-color: var(--secondary-color);
+}
+
+.post {
+  background-color: var(--white-color);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.post h3 {
+  margin-top: 0;
+}
+
+.post h2 a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.post p {
+  color: var(--light-grey-color);
+}
+
+.post a {
+  color: var(--primary-color);
+}
+
+.post button {
+  background-color: var(--secondary-color);
+  color: var(--white-color);
+  padding: 0.5rem;
+  border: none;
+  cursor: pointer;
+}
+
+.post button:hover {
+  background-color: var(--primary-color);
+}
+
+.comment {
+  background-color: var(--white-color);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.comment p {
+  margin: 0;
+}
+
+form {
+  width: 90%;
+  max-width: 400px;
+  background-color: var(--white-color);
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+}
+
+input[type="submit"] {
+  margin-top: 1rem;
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+  background-color: var(--secondary-color);
+}
+
+form label,
+form input[type="text"],
+form textarea {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+form input[type="text"],
+form textarea {
+  padding: 0.5rem;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--light-grey-color);
+}
+
+form button {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  padding: 0.5rem;
+  border: none;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: var(--secondary-color);
+}
+
+/* Adding transitions */
+* {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
   }
-  
+
   h1 {
     font-size: 2.5rem;
   }
-  
+
   h2 {
     font-size: 2rem;
   }
-  
+
   h3 {
-    font-size: 1.8rem;
+    font-size: 1.75rem;
   }
-  
+
   p {
     font-size: 1rem;
   }
-  
-  /* Layout and spacing */
+
   .container {
-    max-width: 960px;
-    margin: 0 auto;
     padding: 1rem;
   }
-  
-  header {
-    background-color: #333;
-    color: #fff;
-    padding: 1rem;
-  }
-  
-  nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: space-between;
-  }
-  
+
   nav ul li {
     margin-right: 1rem;
   }
-  
-  footer {
-    background-color: #f5f5f5;
-    color: #333;
-    padding: 1rem;
-    text-align: center;
-  }
-  
-  /* Responsive design */
-  @media (max-width: 768px) {
-    .container {
-      padding: 0.5rem;
-    }
-  
-    h1 {
-      font-size: 2rem;
-    }
-  
-    h2 {
-      font-size: 1.8rem;
-    }
-  
-    h3 {
-      font-size: 1.6rem;
-    }
-  
-    p {
-      font-size: 0.9rem;
-    }
-  
-    header {
-      padding: 0.5rem;
-    }
-  }
-  
+}
