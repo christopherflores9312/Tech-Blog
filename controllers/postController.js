@@ -181,9 +181,19 @@ router.put('/:id', async (req, res) => {
 // Delete a post
 router.delete('/:id', async (req, res) => {
   try {
+    const postId = req.params.id;
+
+    // Delete the associated comments first
+    await Comment.destroy({
+      where: {
+        post_id: postId,
+      },
+    });
+
+    // Delete the post
     const deletedPost = await Post.destroy({
       where: {
-        id: req.params.id,
+        id: postId,
       },
     });
 
@@ -192,6 +202,7 @@ router.delete('/:id', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
 
 
 module.exports = router;
