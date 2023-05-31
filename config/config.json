@@ -1,0 +1,21 @@
+{
+    "development": {
+      "username": "root",
+      "password": "root",
+      "database": "techblog_db",
+      "host": "localhost",
+      "dialect": "mysql"
+    },
+    "production": {
+      "use_env_variable": "CLEARDB_DATABASE_URL",
+      "dialect": "postgres",
+      "protocol": "postgres",
+      "dialectOptions": {
+        "ssl": {
+          "require": true,
+          "rejectUnauthorized": false
+        }
+      }
+    }
+  }
+  
