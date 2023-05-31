@@ -15,7 +15,8 @@
           "require": true,
           "rejectUnauthorized": false
         }
-      }
+      },
+      "migrations": "./migrations"  
     }
   }
   
